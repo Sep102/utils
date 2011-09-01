@@ -1,0 +1,15 @@
+#!/bin/sh
+# vim: syntax=zsh
+
+ctags=/usr/local/bin/ctags
+
+topDir=$1
+if [[ $# < 1 ]]; then
+	topDir=$(pwd)
+fi
+
+for dir in $topDir/*; do
+	if [[ -d "$dir" ]]; then
+		"$ctags" --recurse=yes -f "$dir/tags" "$dir"
+	fi
+done
